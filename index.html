@@ -30,6 +30,7 @@
             cursor: pointer;
             font-size: 18px;
             margin-top: 20px;
+            margin-bottom: 10px;
         }
         button:hover {
             opacity: 0.9;
@@ -45,7 +46,7 @@
 <body>
     <h1>Welcome to My Rewarding Mini App!</h1>
     <p>Earn coins by watching a short ad.</p>
-    <button id="showAdButton">Watch Ad for Reward</button>
+    <button id="showInterstitialAdButton">Watch Ad for Reward</button>
     <div id="message"></div>
 
     <script>
@@ -64,14 +65,14 @@
             document.getElementById('message').innerText = "Please open this app in a Telegram client.";
         }
 
-        const showAdButton = document.getElementById('showAdButton');
+        const showInterstitialAdButton = document.getElementById('showInterstitialAdButton');
         const messageDiv = document.getElementById('message');
         let userCoins = 0; // Simple client-side coin counter for demonstration
 
         // Function to call the Rewarded Interstitial Ad
-        function showRewardedAd() {
+        function showRewardedInterstitialAd() {
             messageDiv.innerText = "Loading ad...";
-            console.log("Attempting to show rewarded ad...");
+            console.log("Attempting to show rewarded interstitial ad...");
 
             // Use your specific Monetag Rewarded Interstitial Tag: show_9383686
             window.show_9383686({
@@ -100,7 +101,7 @@
             });
         }
 
-        showAdButton.addEventListener('click', showRewardedAd);
+        showInterstitialAdButton.addEventListener('click', showRewardedInterstitialAd);
 
         // Initial message
         messageDiv.innerText = `You have ${userCoins} coins.`;
