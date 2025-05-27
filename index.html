@@ -40,16 +40,7 @@
             color: var(--tg-theme-hint-color, #888);
         }
     </style>
-    
-// Rewarded interstitial
-
-show_9383686().then(() => {
-    // You need to add your user reward function here, which will be executed after the user watches the ad.
-    // For more details, please refer to the detailed instructions.
-    alert('You have seen an ad!');
-})
-
-        
+    <script async data-cfasync="false" src="https://tg-monetag.com/js/sdk.js?v=YOUR_MONETAG_SITE_ID_HERE"></script>
 </head>
 <body>
     <h1>Welcome to My Rewarding Mini App!</h1>
@@ -82,14 +73,16 @@ show_9383686().then(() => {
             messageDiv.innerText = "Loading ad...";
             console.log("Attempting to show rewarded ad...");
 
-            // IMPORTANT: Replace 'show_YOUR_REWARDED_TAG_ID' with your actual Rewarded Interstitial Tag from Monetag
-            // Example: window.show_12345678({ type: 'rewarded', onSuccess: handleAdSuccess, onError: handleAdError });
-            window.show_YOUR_REWARDED_TAG_ID({
-                type: 'rewarded',
+            // Use your specific Monetag Rewarded Interstitial Tag: show_9383686
+            window.show_9383686({
+                type: 'rewarded', // Explicitly specify it's a rewarded ad
                 onSuccess: function() {
                     console.log("Monetag Rewarded Interstitial Ad shown successfully and closed.");
-                    userCoins += 10; // Reward the user
+                    alert('You have seen an ad!'); // Your original alert
+                    
+                    userCoins += 10; // Reward the user with 10 coins
                     messageDiv.innerText = `Ad watched! You earned 10 coins. Total coins: ${userCoins}`;
+                    
                     // Send data back to the bot to confirm reward
                     if (window.Telegram && window.Telegram.WebApp) {
                         Telegram.WebApp.sendData(JSON.stringify({
