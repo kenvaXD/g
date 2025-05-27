@@ -40,7 +40,16 @@
             color: var(--tg-theme-hint-color, #888);
         }
     </style>
-    YOUR_MONETAG_SDK_SCRIPT_HERE
+    
+// Rewarded interstitial
+
+show_9383686().then(() => {
+    // You need to add your user reward function here, which will be executed after the user watches the ad.
+    // For more details, please refer to the detailed instructions.
+    alert('You have seen an ad!');
+})
+
+        
 </head>
 <body>
     <h1>Welcome to My Rewarding Mini App!</h1>
