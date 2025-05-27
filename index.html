@@ -30,7 +30,6 @@
             cursor: pointer;
             font-size: 18px;
             margin-top: 20px;
-            margin-bottom: 10px;
         }
         button:hover {
             opacity: 0.9;
@@ -41,12 +40,13 @@
             color: var(--tg-theme-hint-color, #888);
         }
     </style>
-    <script src='//libtl.com/sdk.js' data-zone='9383686' data-sdk='show_9383686'></script>
+    
+        
 </head>
 <body>
     <h1>Welcome to My Rewarding Mini App!</h1>
     <p>Earn coins by watching a short ad.</p>
-    <button id="showInterstitialAdButton">Watch Ad for Reward</button>
+    <button id="showAdButton">Watch Ad for Reward</button>
     <div id="message"></div>
 
     <script>
@@ -65,25 +65,24 @@
             document.getElementById('message').innerText = "Please open this app in a Telegram client.";
         }
 
-        const showInterstitialAdButton = document.getElementById('showInterstitialAdButton');
+        const showAdButton = document.getElementById('showAdButton');
         const messageDiv = document.getElementById('message');
         let userCoins = 0; // Simple client-side coin counter for demonstration
 
         // Function to call the Rewarded Interstitial Ad
-        function showRewardedInterstitialAd() {
+        function showRewardedAd() {
             messageDiv.innerText = "Loading ad...";
-            console.log("Attempting to show rewarded interstitial ad...");
-
-            // Use your specific Monetag Rewarded Interstitial Tag: show_9383686
-            window.show_9383686({
-                type: 'rewarded', // Explicitly specify it's a rewarded ad
+            console.log("Attempting to show rewarded ad...");
+            show_9383686().then(() => {
+              alert('You have seen an ad!');
+            })// IMPORTANT: Replace 'show_YOUR_REWARDED_TAG_ID' with your actual Rewarded Interstitial Tag from Monetag
+            // Example: window.show_12345678({ type: 'rewarded', onSuccess: handleAdSuccess, onError: handleAdError });
+            window.show_YOUR_REWARDED_TAG_ID({
+                type: 'rewarded',
                 onSuccess: function() {
                     console.log("Monetag Rewarded Interstitial Ad shown successfully and closed.");
-                    alert('You have seen an ad!'); // Your original alert
-                    
-                    userCoins += 10; // Reward the user with 10 coins
+                    userCoins += 10; // Reward the user
                     messageDiv.innerText = `Ad watched! You earned 10 coins. Total coins: ${userCoins}`;
-                    
                     // Send data back to the bot to confirm reward
                     if (window.Telegram && window.Telegram.WebApp) {
                         Telegram.WebApp.sendData(JSON.stringify({
@@ -101,7 +100,7 @@
             });
         }
 
-        showInterstitialAdButton.addEventListener('click', showRewardedInterstitialAd);
+        showAdButton.addEventListener('click', showRewardedAd);
 
         // Initial message
         messageDiv.innerText = `You have ${userCoins} coins.`;
